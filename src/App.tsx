@@ -51,7 +51,8 @@ async function invokeHelloWorld() {
 
 
     <Authenticator>
-      {({ signOut, user }) => (
+      
+      {/* {({ signOut, user }) => ( */}
         
         <>
           <div>
@@ -80,7 +81,9 @@ async function invokeHelloWorld() {
             <div>{text}</div>
           </p>
         </>
-      )}
+
+      {/* )} */}
+
     </Authenticator>
 )}
 
