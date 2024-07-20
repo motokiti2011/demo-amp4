@@ -19,10 +19,18 @@ import '@aws-amplify/ui-react/styles.css'
 import { Amplify } from 'aws-amplify'
 import outputs from '../amplify_outputs.json'
 
-Amplify.configure(outputs)
+import { BrowserRouter } from 'react-router-dom'
+import { AppRoutes } from './Routes'
 
+Amplify.configure(outputs)
+// const root = ReactDOM.createRoot(
+//   document.getElementById('root') as HTMLElement
+// );
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <AppRoutes />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
 )
