@@ -12,6 +12,25 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.guest()]),
+  Customer: a
+  .model({
+    customerId: a.id().required(),
+    // fields can be of various scalar types,
+    // such as string, boolean, float, integers etc.
+    name: a.string(),
+    // fields can be of custom types
+    location: a.customType({
+      // fields can be required or optional
+      lat: a.float().required(),
+      long: a.float().required(),
+    }),
+      // fields can be enums
+      engagementStage: a.enum(["PROSPECT", "INTERESTED", "PURCHASED"]),
+      collectionId: a.id(),
+      collection: a.belongsTo("Collection", "collectionId")
+      // Use custom identifiers. By default, it uses an `id: a.id()` field
+    })
+    .identifier(["customerId"]),
   });
 
 export type Schema = ClientSchema<typeof schema>;
