@@ -12,19 +12,6 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.guest()]),
-
-    UserInfo: a.model({
-      // ユーザーID
-      userId: a.id().required(),
-      // ユーザー名
-      userName: a.string().required(),
-      // メールアドレス
-      mailaddress: a.email(),
-      // 2. Create a belongsTo relationship with the reference field
-      // team: a.belongsTo('Team', 'teamId'),
-    })
-    .authorization(allow => [allow.publicApiKey()]),
-
 });
 
 export type Schema = ClientSchema<typeof schema>;
