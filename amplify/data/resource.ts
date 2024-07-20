@@ -22,8 +22,8 @@ const schema = a.schema({
       mailaddress: a.email(),
       // 2. Create a belongsTo relationship with the reference field
       // team: a.belongsTo('Team', 'teamId'),
-    })
-    .authorization(allow => [allow.publicApiKey()]),
+    }),
+    // .authorization(allow => [allow.publicApiKey()]),
 
   });
 
