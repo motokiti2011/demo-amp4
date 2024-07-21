@@ -47,6 +47,11 @@ and "delete" any "Todo" records.
 
 const schema = a
   .schema({
+    Todo: a
+      .model({
+        content: a.string(),
+      })
+      .authorization((allow) => [allow.guest()]),
     Customer: a
       .model({
         customerId: a.id().required(),
