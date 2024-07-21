@@ -1,6 +1,9 @@
 import { useState } from "react";
 import Modal from "react-modal";
 
+
+import { Authenticator } from '@aws-amplify/ui-react';
+
 const User = () => {
 
     const [modal, setModal] = useState(false);
@@ -14,16 +17,26 @@ const User = () => {
 
     return (
         <>
-            <div>
-            <button onClick={openModal}>modal</button>
+        <div>
+            <h1 className="bg-teal-400">User</h1>
+
+            <button onClick={openModal}>モーダル</button>
+            
             <Modal isOpen={modal}>
                 <button onClick={closeModal}>閉じこ</button>
-                <h1>TestModal</h1>
+                <Authenticator>
+                    {({ signOut, user }) => (
+                    <>
+                    <div>
+                        <h1>Hello {user?.username}</h1>
+                        <button onClick={signOut}>Sign out</button>
+                        {/* <Component {...pageProps} /> */}
+                    </div>
+                    </>
+                )}
+                </Authenticator>
             </Modal>
-
-
-            </div>
-            <h1>User</h1>
+        </div>
         </>
     )
 } 

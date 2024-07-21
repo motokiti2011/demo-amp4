@@ -89,6 +89,19 @@ const schema = a
       })
       // .secondaryIndexes((index) => [index("userId")]),
       .identifier(["userId"]),
+    // 商品
+    Product: a
+      .model({
+        productName: a.string(),  // 商品名
+        productCategory: a.string(),  // 商品カテゴリー
+        productQuantity: a.string(),  // 商品数
+        productExplanation: a.string(),  // 商品説明
+        productContributorId:a.string(),  // 商品登録者ID
+        productContributor:a.string(),  // 商品登録者
+        productImageUrl:a.string(),  // 商品画像URL
+        productIda: a.id().required(), // 商品ID
+      })
+      .identifier(["productIda"]),
 
   })
   .authorization((allow) => [allow.publicApiKey()]);
