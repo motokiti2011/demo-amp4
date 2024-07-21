@@ -79,8 +79,23 @@ const schema = a
         // customize secondary indexes to optimize your query performance
       })
       .secondaryIndexes((index) => [index("representativeId")]),
+    UserInfo: a
+      .model({
+        userName: a.string(), // fields can be arrays
+        mailAddress: a.email(),
+        userId: a.id().required(),
+        // customize secondary indexes to optimize your query performance
+      })
+      .secondaryIndexes((index) => [index("representativeId")]),
+
+
+
+
   })
   .authorization((allow) => [allow.publicApiKey()]);
+
+
+
 
 export type Schema = ClientSchema<typeof schema>;
 
