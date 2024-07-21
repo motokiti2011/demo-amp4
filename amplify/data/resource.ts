@@ -71,6 +71,7 @@ const schema = a
         // Use custom identifiers. By default, it uses an `id: a.id()` field
       })
       .identifier(["customerId"]),
+      
     Collection: a
       .model({
         customers: a.hasMany("Customer", "collectionId"), // setup relationships between types
@@ -86,10 +87,8 @@ const schema = a
         userId: a.id().required(),
         // customize secondary indexes to optimize your query performance
       })
-      .secondaryIndexes((index) => [index("representativeId")]),
-
-
-
+      // .secondaryIndexes((index) => [index("userId")]),
+      .identifier(["userId"]),
 
   })
   .authorization((allow) => [allow.publicApiKey()]);
