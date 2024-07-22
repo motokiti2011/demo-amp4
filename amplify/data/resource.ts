@@ -6,50 +6,12 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any unauthenticated user can "create", "read", "update", 
 and "delete" any "Todo" records.
 =========================================================================*/
-// const schema = a.schema({
-//   Todo: a
-//     .model({
-//       content: a.string(),
-//     })
-//     .authorization((allow) => [allow.guest()]),
-//   Customer: a
-//   .model({
-//     customerId: a.id().required(),
-//     // fields can be of various scalar types,
-//     // such as string, boolean, float, integers etc.
-//     name: a.string(),
-//     // fields can be of custom types
-//     location: a.customType({
-//       // fields can be required or optional
-//       lat: a.float().required(),
-//       long: a.float().required(),
-//     }),
-//       // fields can be enums
-//       engagementStage: a.enum(["PROSPECT", "INTERESTED", "PURCHASED"]),
-//       collectionId: a.id(),
-//       collection: a.belongsTo("Collection", "collectionId")
-//       // Use custom identifiers. By default, it uses an `id: a.id()` field
-//     })
-//     .identifier(["customerId"]),
-//   });
-
-// export type Schema = ClientSchema<typeof schema>;
-
-// export const data = defineData({
-//   schema,
-//   authorizationModes: {
-//     defaultAuthorizationMode: 'iam',
-//   },
-// });
-
-
-// import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
-
 const schema = a
   .schema({
     Todo: a
       .model({
         content: a.string(),
+        isDone: a.boolean(),
       })
       .authorization((allow) => [allow.guest()]),
     Customer: a
@@ -105,8 +67,6 @@ const schema = a
 
   })
   .authorization((allow) => [allow.publicApiKey()]);
-
-
 
 
 export type Schema = ClientSchema<typeof schema>;
