@@ -16,12 +16,3 @@ export default function ProductMenu() {
     <button onClick={createTodo}>Add new todo</button>
   </div>
 }
-
-// const ProductMenu = () => {
-//     return (
-//         <>
-//           <h1>ProductMenu</h1>
-//         </>
-//     )
-// } 
-// export default ProductMenu;
