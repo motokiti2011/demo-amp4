@@ -8,35 +8,53 @@ export default function ProductMenu() {
 
   const [todos, setTodos] = useState<Schema["Todo"]["type"][]>([]);
 
-  // 取得
-  const fetchTodos = async () => {
-    const { data: items
-      // , errors  
-    } = await client.models.Todo.list();
-    setTodos(items);
-  };
+  // // 取得
+  // const fetchTodos = async () => {
+  //   const { data: items
+  //     // , errors  
+  //   } = await client.models.Todo.list();
+  //   setTodos(items);
+  // };
+
+  function fetchTodos() {
+    client.models.Todo.list();
+  }
+
 
   // リアルタイム更新を購読
-  useEffect(() => {
-    const sub = client.models.Todo.observeQuery().subscribe({
-      next: ({ items }) => {
-        setTodos([...items]);
-      },
-    });
+  // useEffect(() => {
+  //   const sub = client.models.Todo.observeQuery().subscribe({
+  //     next: ({ items }) => {
+  //       setTodos([...items]);
+  //     },
+  //   });
+  //   return () => sub.unsubscribe();
+  // }, []);
 
-    return () => sub.unsubscribe();
+  useEffect(() => {
+    client.models.Todo.observeQuery().subscribe({
+      next: (data) => setTodos([...data.items]),
+    });
   }, []);
 
+  // // 登録
+  // const createTodo = async () => {
+  //   await client.models.Todo.create({
+  //     content: window.prompt("Todo content?"),
+  //     isDone: false,
+  //   });
+  //   // 登録後データ取得
+  //   fetchTodos();
+  // }
 
-  // 登録
-  const createTodo = async () => {
-    await client.models.Todo.create({
-      content: window.prompt("Todo content?"),
-      isDone: false,
-    });
+  function createTodo() {
+    client.models.Todo.create({
+       content: window.prompt("Todo content") });
     // 登録後データ取得
     fetchTodos();
   }
+
+
 
   return  <div>
     <h1>ProductMenu</h1>
