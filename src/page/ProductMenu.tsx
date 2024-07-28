@@ -4,22 +4,38 @@ import type { Schema } from "../../amplify/data/resource";
 
 const client = generateClient<Schema>()
 
-export default function ProductMenu() {
 
-  const [todos, setTodos] = useState<Schema["Todo"]["type"][]>([]);
+function ProductMenu() {
+
+
+  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+
+  useEffect(() => {
+    client.models.Todo.observeQuery().subscribe({
+      next: (data) => setTodos([...data.items]),
+    });
+  }, []);
+
+  
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({ id })
+  }
+
+
+  function createTodo() {
+    client.models.Todo.create({ content: window.prompt("Todo content") });
+  }
+
+
+
+
+  // const [todos, setTodos] = useState<Schema["Todo"]["type"][]>([]);
 
   // // 取得
   // const fetchTodos = async () => {
-  //   const { data: items
-  //     // , errors  
-  //   } = await client.models.Todo.list();
+  //   const { data: items } = await client.models.Todo.list();
   //   setTodos(items);
   // };
-
-  function fetchTodos() {
-    client.models.Todo.list();
-  }
-
 
   // リアルタイム更新を購読
   // useEffect(() => {
@@ -31,11 +47,11 @@ export default function ProductMenu() {
   //   return () => sub.unsubscribe();
   // }, []);
 
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
+  // useEffect(() => {
+  //   client.models.Todo.observeQuery().subscribe({
+  //     next: (data) => setTodos([...data.items]),
+  //   });
+  // }, []);
 
   // // 登録
   // const createTodo = async () => {
@@ -47,18 +63,22 @@ export default function ProductMenu() {
   //   fetchTodos();
   // }
 
-  function createTodo() {
-    client.models.Todo.create({
-       content: window.prompt("Todo content") });
-    // 登録後データ取得
-    fetchTodos();
-  }
-
 
 
   return  <div>
     <h1>ProductMenu</h1>
-    <button onClick={createTodo}>Add new todo（登録）</button>
+
+    <button onClick={createTodo}>+ new</button>
+      <ul>
+        {todos.map((todo) => (
+          <li 
+          onClick={() => deleteTodo(todo.id)}
+          key={todo.id}>{todo.content}</li>
+        ))}
+      </ul>
+
+
+    {/* <button onClick={createTodo}>Add new todo（登録）</button>
     <div>一覧表示</div>
     <ul>
         {todos.map(({ id, content }) => (
@@ -67,9 +87,11 @@ export default function ProductMenu() {
     </ul>
     <div>
       <button onClick={fetchTodos}>disp todo（表示）</button>
-    </div>
+    </div> */}
 
 
 
   </div>
 }
+
+export default ProductMenu;
