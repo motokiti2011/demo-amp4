@@ -11,7 +11,7 @@ export default function ProductMenu() {
   // 取得
   const fetchTodos = async () => {
     const { data: items
-      // , errors 
+      // , errors  
     } = await client.models.Todo.list();
     setTodos(items);
   };
@@ -41,13 +41,17 @@ export default function ProductMenu() {
   return  <div>
     <h1>ProductMenu</h1>
     <button onClick={createTodo}>Add new todo（登録）</button>
-
     <div>一覧表示</div>
     <ul>
         {todos.map(({ id, content }) => (
           <li key={id}>{content}</li>
         ))}
-      </ul>
+    </ul>
+    <div>
+      <button onClick={fetchTodos}>disp todo（表示）</button>
+    </div>
+
+
 
   </div>
 }
