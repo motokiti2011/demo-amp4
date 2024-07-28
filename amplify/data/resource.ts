@@ -13,7 +13,8 @@ const schema = a
         content: a.string(),
         isDone: a.boolean(),
       })
-      .authorization((allow) => [allow.guest()]),
+      // .authorization((allow) => [allow.guest()])
+      ,
     Customer: a
       .model({
         customerId: a.id().required(),

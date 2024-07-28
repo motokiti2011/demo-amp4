@@ -53,7 +53,7 @@ function ProductMenu() {
   //   });
   // }, []);
 
-  // // 登録
+  // 登録
   // const createTodo = async () => {
   //   await client.models.Todo.create({
   //     content: window.prompt("Todo content?"),
