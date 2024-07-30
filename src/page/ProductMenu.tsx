@@ -1,35 +1,20 @@
 import { generateClient } from "aws-amplify/data";
 import { useEffect, useState } from "react";
+import Modal from "react-modal";
 import type { Schema } from "../../amplify/data/resource";
+import ProductDetail from "../model/ProductDetail";
 
 const client = generateClient<Schema>()
 
 
 function ProductMenu() {
-
-
-  // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  // useEffect(() => {
-  //   client.models.Todo.observeQuery().subscribe({
-  //     next: (data) => setTodos([...data.items]),
-  //   });
-  // }, []);
+  
+  const [todos, setTodos] = useState<Schema["Todo"]["type"][]>([]);
 
   // 削除
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id })
   }
-
-
-  // function createTodo() {
-  //   client.models.Todo.create({ content: window.prompt("Todo content") });
-  // }
-
-
-
-
-  const [todos, setTodos] = useState<Schema["Todo"]["type"][]>([]);
 
   // 取得
   const fetchTodos = async () => {
@@ -63,10 +48,19 @@ function ProductMenu() {
     fetchTodos();
   }
 
+  const [modal, setModal] = useState(false);
+
+  const openModal = () => {
+      setModal(true);
+  };
+  const closeModal = () => {
+      setModal(false);
+  };
+
 
 
   return  <div>
-    <h1>ProductMenu</h1>
+    <h1>商品メニュー画面</h1>
 
     <button onClick={createTodo}>+ new</button>
       <ul>
@@ -76,20 +70,18 @@ function ProductMenu() {
           key={todo.id}>{todo.content}</li>
         ))}
       </ul>
+      <div>
+        <button onClick={fetchTodos}>disp todo（表示）</button>
+      </div>
 
 
-    {/* <button onClick={createTodo}>Add new todo（登録）</button>
-    <div>一覧表示</div>
-    <ul>
-        {todos.map(({ id, content }) => (
-          <li key={id}>{content}</li>
-        ))}
-    </ul>
-    <div>
-      <button onClick={fetchTodos}>disp todo（表示）</button>
-    </div> */}
-
-
+        <div>
+          <button onClick={openModal}>商品詳細へ</button>
+          <Modal isOpen={modal}>
+              <button onClick={closeModal}>閉じこ</button>
+            <ProductDetail></ProductDetail>
+          </Modal>
+        </div>
 
   </div>
 }
