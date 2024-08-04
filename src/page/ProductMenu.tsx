@@ -48,6 +48,14 @@ function ProductMenu() {
     fetchTodos();
   }
 
+  const getTodo = async () => {
+    await client.models.Todo.get({
+      // id: '...',
+      id: '8041ad1e-2947-4ab7-8388-1eefcb9da6ca',
+    });
+  }
+
+
   const [modal, setModal] = useState(false);
 
   const openModal = () => {
@@ -74,6 +82,9 @@ function ProductMenu() {
         <button onClick={fetchTodos}>disp todo（表示）</button>
       </div>
 
+      <div>
+        <button onClick={getTodo}>Gettodo（1件表示）</button>
+      </div>
 
         <div>
           <button onClick={openModal}>商品詳細へ</button>
