@@ -8,16 +8,15 @@ import type { Schema } from "../../amplify/data/resource";
 const client = generateClient<Schema>()
 
 // test用ID
-const testid = '1111';
-
+// const testid = '1111';
 // // 取得
-const { data: test } = await client.models.Product.get(
-  { productId: testid },
-  {
-    selectionSet: ['productId', 'productId'],
-  }
-);
-console.log(test);
+// const { data: test } = await client.models.Product.get(
+//   { productId: testid },
+//   {
+//     selectionSet: ['productId', 'productId'],
+//   }
+// );
+// console.log(test);
 
 /** 商品詳細 */
 const ProductDetail = () => {
