@@ -37,11 +37,11 @@ const schema = a
         productContributorId:a.string(),  // 商品登録者ID
         productContributor:a.string(),  // 商品登録者
         productImageUrl:a.string(),  // 商品画像URL
-        // productId: a.id().required(), // 商品ID
+        productId: a.id().required(), // 商品ID
       })
       // GSI
       .secondaryIndexes((index) => [index("productCategory")])
-      // .identifier(["productId"]),
+      .identifier(["productId"]),
   })
   .authorization((allow) => [allow.publicApiKey()]);
 
