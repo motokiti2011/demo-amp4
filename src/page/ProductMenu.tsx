@@ -53,6 +53,8 @@ function ProductMenu() {
       // id: '...',
       id: '8041ad1e-2947-4ab7-8388-1eefcb9da6ca',
     });
+    console.log('取得結果Get');
+    console.log(getTodo);
   }
 
 
