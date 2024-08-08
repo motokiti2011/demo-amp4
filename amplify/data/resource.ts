@@ -15,25 +15,6 @@ const schema = a
       })
       // .authorization((allow) => [allow.guest()])
       ,
-    // Customer: a
-    //   .model({
-    //     customerId: a.id().required(),
-    //     // fields can be of various scalar types,
-    //     // such as string, boolean, float, integers etc.
-    //     name: a.string(),
-    //     // fields can be of custom types
-    //     location: a.customType({
-    //       // fields can be required or optional
-    //       lat: a.float().required(),
-    //       long: a.float().required(),
-    //     }),
-    //     // fields can be enums
-    //     engagementStage: a.enum(["PROSPECT", "INTERESTED", "PURCHASED"]),
-    //     collectionId: a.id(),
-    //     collection: a.belongsTo("Collection", "collectionId")
-    //     // Use custom identifiers. By default, it uses an `id: a.id()` field
-    //   })
-    //   .identifier(["customerId"]),
 
     UserInfo: a
       .model({
@@ -56,11 +37,11 @@ const schema = a
         productContributorId:a.string(),  // 商品登録者ID
         productContributor:a.string(),  // 商品登録者
         productImageUrl:a.string(),  // 商品画像URL
-        productId: a.id().required(), // 商品ID
+        // productId: a.id().required(), // 商品ID
       })
       // GSI
       .secondaryIndexes((index) => [index("productCategory")])
-      .identifier(["productId"]),
+      // .identifier(["productId"]),
   })
   .authorization((allow) => [allow.publicApiKey()]);
 
